@@ -12,15 +12,18 @@ public class GuestsList {
         waitingList = new ArrayList<Guest>(availableSeats * 2);
     }
 
-    public int addGuest(String lastName, String firstName, String email, String phoneNumber, Scanner scan) {
+    public int addGuest(String lastName, String firstName, String email, String phoneNumber) {
+        Scanner scan = new Scanner(System.in);
         //Check if the guest is already registered
         System.out.format("First, we will check if the person already has a reservation.\n" +
                 "Please select a method to search for the guest:\n" +
                 "1. Last Name & First Name\n" +
                 "2. Email\n" +
-                "3. Phone Number\n");
+                "3. Phone Number\n" +
+                "Choice: ");
 
         int addChoice = scan.nextInt();
+        System.out.println();
         switch(addChoice){
             case 1:
                 if(checkReservationByName(lastName, firstName)){
@@ -38,7 +41,7 @@ public class GuestsList {
                 }
                 break;
             default:
-                System.out.format("Incorrect choice, please try again");
+                System.out.format("Incorrect choice, please try again\n\n");
                 return -2;
         }
 
@@ -46,12 +49,12 @@ public class GuestsList {
         Guest guest = new Guest(lastName, firstName, email, phoneNumber);
         if(guestsList.size() >= this.availableSeats){
             this.waitingList.add(guest);
-            System.out.format("Te-ai inscris cu succes in lista de asteptare si ai primit numarul de ordine %d. Te vom notifica daca un loc devine disponibil", this.waitingList.indexOf(guest));
+            System.out.format("Te-ai inscris cu succes in lista de asteptare si ai primit numarul de ordine %d. Te vom notifica daca un loc devine disponibil\n\n", this.waitingList.indexOf(guest));
             return this.waitingList.indexOf(guest);
         }else{
             //If the guest list is not full, add the guest to it.
             this.guestsList.add(guest);
-            System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!");
+            System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
             return 0;
         }
     }
