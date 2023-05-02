@@ -12,4 +12,20 @@ public class Guest {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
+    public String getLastName(){
+        return this.lastName;
+    }
+
+    public String getFirstName(){
+        return this.firstName;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getPhoneNumber(){
+        return this.phoneNumber;
+    }
 }
