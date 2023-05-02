@@ -80,4 +80,15 @@ public class Guest {
         return result;
     }
 
+    public String toString(){
+        return String.format("First name: %s\n" +
+                "Last name: %s\n" +
+                "Email: %s\n" +
+                "Phone number: %s\n", this.firstName, this.lastName, this.email, this.phoneNumber);
+    }
+
+    public String fullName(){
+        return String.format("%s %s", this.firstName, this.lastName);
+    }
+
 }
