@@ -16,45 +16,13 @@ public class GuestsList {
         Scanner scan = new Scanner(System.in);
 
         //Check if the guests is already registered
-        int addChoice = 0;
-        boolean optionSelected = false;
-        while(!optionSelected){
-            System.out.format("First, we will check if the person already has a reservation.\n" +
-                    "Please select a method to search for the guest:\n" +
-                    "1. Last Name & First Name\n" +
-                    "2. Email\n" +
-                    "3. Phone Number\n" +
-                    "Choice: ");
-
-            addChoice = scan.nextInt();
-            System.out.println();
-            switch(addChoice){
-                case 1:
-                    if(checkReservationByName()){
-                        return -1;
-                    }
-                    optionSelected = true;
-                    break;
-                case 2:
-                    if(checkReservationByEmail()){
-                        return -1;
-                    }
-                    optionSelected = true;
-                    break;
-                case 3:
-                    if(checkReservationByPhoneNumber()){
-                        return -1;
-                    }
-                    optionSelected = true;
-                    break;
-                default:
-                    System.out.format("Incorrect choice, please try again\n\n");
-                    break;
-            }
+        System.out.println("First we will check if the guest is already on our lists.");
+        if(checkReservation()){
+            return -1;
         }
 
+
         //Create guest
-        System.out.println("Guest is not on our lists.");
         System.out.print("New guest last name: ");
         String lastName = scan.next();
 
@@ -109,6 +77,7 @@ public class GuestsList {
         }
 
         //If no guest found
+        System.out.println("Guest is not on our lists.");
         return false;
     }
 
@@ -135,6 +104,7 @@ public class GuestsList {
         }
 
         //If no guest found
+        System.out.println("Guest is not on our lists.");
         return false;
     }
 
@@ -161,8 +131,52 @@ public class GuestsList {
         }
 
         //If no guest found
+        System.out.println("Guest is not on our lists.");
         return false;
     }
+
+    public boolean checkReservation(){
+        Scanner scan = new Scanner(System.in);
+        int addChoice = 0;
+        boolean optionSelected = false;
+
+        while(!optionSelected){
+            System.out.format("Please select a method to search for the guest:\n" +
+                    "1. Last Name & First Name\n" +
+                    "2. Email\n" +
+                    "3. Phone Number\n" +
+                    "Choice: ");
+
+            addChoice = scan.nextInt();
+            System.out.println();
+
+            switch(addChoice){
+                case 1:
+                    if(checkReservationByName()){
+                        return true;
+                    }
+                    optionSelected = true;
+                    break;
+                case 2:
+                    if(checkReservationByEmail()){
+                        return true;
+                    }
+                    optionSelected = true;
+                    break;
+                case 3:
+                    if(checkReservationByPhoneNumber()){
+                        return true;
+                    }
+                    optionSelected = true;
+                    break;
+                default:
+                    System.out.format("Incorrect choice, please try again\n\n");
+                    break;
+            }
+        }
+        return false;
+    }
+
 
 
 }
