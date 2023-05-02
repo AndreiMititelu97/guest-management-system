@@ -11,9 +11,9 @@ public class GuestsList {
         guestsList = new ArrayList<Guest>(guestsCapacity * 2);
     }
 
-    private boolean isOnTheListAlready(Guest g) {
+    public boolean isOnTheListAlready(Guest g) {
         for(int i = 0; i < this.guestsList.size(); i++){
-            if(this.guestsList.equals(g)){
+            if(this.guestsList.get(i).hashCode() == g.hashCode()){
                 return true;
             }
         }
@@ -215,9 +215,20 @@ public class GuestsList {
     }
 
     public void showGuestsList(){
-        for(int i = 0; i < this.guestsCapacity; i++){
+        for(int i = 0; i < this.guestsList.size(); i++){
+            if(i == this.guestsCapacity){
+                break;
+            }
             System.out.format("%s %s\n", this.guestsList.get(i).getFirstName(), this.guestsList.get(i).getLastName());
         }
+        System.out.println();
+    }
+
+    public void showWaitingList(){
+        for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
+            System.out.format("%s %s\n", this.guestsList.get(i).getFirstName(), this.guestsList.get(i).getLastName());
+        }
+        System.out.println();
     }
 
 
