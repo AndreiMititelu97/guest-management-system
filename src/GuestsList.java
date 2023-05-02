@@ -159,12 +159,10 @@ public class GuestsList {
         //Find the guest by last name and first name in the guests list
         for(int i = 0; i < this.guestsList.size(); i++){
             if(this.guestsList.get(i).getLastName().equals(lastName) && this.guestsList.get(i).getFirstName().equals(firstName)){
-                System.out.println("Guest is on the guests list\n");
                 return this.guestsList.get(i);
             }
         }
         //If no guest found
-        System.out.println("Guest is not on our lists.");
         return null;
     }
 
@@ -173,7 +171,6 @@ public class GuestsList {
             case 2://Search for email
                 for(int i = 0; i < this.guestsList.size(); i++){
                     if(this.guestsList.get(i).getEmail().equals(match)){
-                        System.out.println("Guest is on the guests list\n");
                         return this.guestsList.get(i);
                     }
                 }
@@ -182,12 +179,12 @@ public class GuestsList {
             case 3://Search for phone number
                 for(int i = 0; i < this.guestsList.size(); i++){
                     if(this.guestsList.get(i).getPhoneNumber().equals(match)){
-                        System.out.println("Guest is on the guests list\n");
                         return this.guestsList.get(i);
                     }
                 }
                 break;
         }
+        //If no guest found
         return null;
     }
 
@@ -215,6 +212,12 @@ public class GuestsList {
             return true;
         }
         return false;
+    }
+
+    public void showGuestsList(){
+        for(int i = 0; i < this.guestsCapacity; i++){
+            System.out.format("%s %s\n", this.guestsList.get(i).getFirstName(), this.guestsList.get(i).getLastName());
+        }
     }
 
 
