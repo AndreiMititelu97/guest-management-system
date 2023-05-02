@@ -261,6 +261,10 @@ public class GuestsList {
         return count;
     }
 
+    public int numberOfPeopleTotal(){
+        return this.guestsList.size();
+    }
+
 
 
 }
