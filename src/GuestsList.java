@@ -253,6 +253,14 @@ public class GuestsList {
         return count;
     }
 
+    public int numberOfPeopleWaiting(){
+        int count = 0;
+        for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
+            count++;
+        }
+        return count;
+    }
+
 
 
 }
