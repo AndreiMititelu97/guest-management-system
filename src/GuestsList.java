@@ -16,34 +16,41 @@ public class GuestsList {
         Scanner scan = new Scanner(System.in);
 
         //Check if the guests is already registered
-        System.out.format("First, we will check if the person already has a reservation.\n" +
-                "Please select a method to search for the guest:\n" +
-                "1. Last Name & First Name\n" +
-                "2. Email\n" +
-                "3. Phone Number\n" +
-                "Choice: ");
+        int addChoice = 0;
+        boolean optionSelected = false;
+        while(!optionSelected){
+            System.out.format("First, we will check if the person already has a reservation.\n" +
+                    "Please select a method to search for the guest:\n" +
+                    "1. Last Name & First Name\n" +
+                    "2. Email\n" +
+                    "3. Phone Number\n" +
+                    "Choice: ");
 
-        int addChoice = scan.nextInt();
-        System.out.println();
-        switch(addChoice){
-            case 1:
-                if(checkReservationByName()){
-                    return -1;
-                }
-                break;
-            case 2:
-                if(checkReservationByEmail()){
-                    return -1;
-                }
-                break;
-            case 3:
-                if(checkReservationByPhoneNumber()){
-                    return -1;
-                }
-                break;
-            default:
-                System.out.format("Incorrect choice, please try again\n\n");
-                return -2;
+            addChoice = scan.nextInt();
+            System.out.println();
+            switch(addChoice){
+                case 1:
+                    if(checkReservationByName()){
+                        return -1;
+                    }
+                    optionSelected = true;
+                    break;
+                case 2:
+                    if(checkReservationByEmail()){
+                        return -1;
+                    }
+                    optionSelected = true;
+                    break;
+                case 3:
+                    if(checkReservationByPhoneNumber()){
+                        return -1;
+                    }
+                    optionSelected = true;
+                    break;
+                default:
+                    System.out.format("Incorrect choice, please try again\n\n");
+                    break;
+            }
         }
 
         //Create guest
@@ -88,7 +95,7 @@ public class GuestsList {
         //Find the guest by last name and first name in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getLastName().equals(lastName) && guestsList.get(i).getFirstName().equals(firstName)){
-                System.out.println("Guest is already on the guests list");
+                System.out.println("Guest is already on the guests list\n");
                 return true;
             }
         }
@@ -96,7 +103,7 @@ public class GuestsList {
         //Find the guest by last name and first name in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getLastName().equals(lastName) && waitingList.get(i).getFirstName().equals(firstName)){
-                System.out.println("Guest is already on the waiting list");
+                System.out.println("Guest is already on the waiting list\n");
                 return true;
             }
         }
@@ -114,7 +121,7 @@ public class GuestsList {
         //Find the guest by email in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getEmail().equals(email)){
-                System.out.println("Guest is already on the guests list");
+                System.out.println("Guest is already on the guests list\n");
                 return true;
             }
         }
@@ -122,7 +129,7 @@ public class GuestsList {
         //Find the guest by email in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getEmail().equals(email)){
-                System.out.println("Guest is already on the waiting list");
+                System.out.println("Guest is already on the waiting list\n");
                 return true;
             }
         }
@@ -140,7 +147,7 @@ public class GuestsList {
         //Find the guest by phone number in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getPhoneNumber().equals(phoneNumber)){
-                System.out.println("Guest is already on the guests list");
+                System.out.println("Guest is already on the guests list\n");
                 return true;
             }
         }
@@ -148,7 +155,7 @@ public class GuestsList {
         //Find the guest by phone number in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getPhoneNumber().equals(phoneNumber)){
-                System.out.println("Guest is already on the waiting list");
+                System.out.println("Guest is already on the waiting list\n");
                 return true;
             }
         }
