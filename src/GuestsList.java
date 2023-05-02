@@ -242,6 +242,17 @@ public class GuestsList {
         return this.guestsCapacity - count;
     }
 
+    public int numberOfGuests(){
+        int count = 0;
+        for(int i = 0; i < this.guestsList.size(); i++){
+            if(i == this.guestsCapacity){
+                break;
+            }
+            count++;
+        }
+        return count;
+    }
+
 
 
 }
