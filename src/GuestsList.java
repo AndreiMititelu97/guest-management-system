@@ -231,6 +231,17 @@ public class GuestsList {
         System.out.println();
     }
 
+    public int numberOfAvailableSpots(){
+        int count = 0;
+        for(int i = 0; i < this.guestsList.size(); i++){
+            if(i == this.guestsCapacity){
+                break;
+            }
+            count++;
+        }
+        return this.guestsCapacity - count;
+    }
+
 
 
 }
