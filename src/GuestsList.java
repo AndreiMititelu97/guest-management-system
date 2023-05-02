@@ -17,10 +17,9 @@ public class GuestsList {
 
         //Check if the guests is already registered
         System.out.println("First we will check if the guest is already on our lists.");
-        if(checkReservation()){
+        if(indexOfGuest() >= 0){
             return -1;
         }
-
 
         //Create guest
         System.out.print("New guest last name: ");
@@ -51,7 +50,7 @@ public class GuestsList {
         }
     }
 
-    private boolean checkReservationByName(){
+    private boolean containsGuestByName(){
         Scanner scan = new Scanner(System.in);
         System.out.print("Write the last name of the guest: ");
         String lastName = scan.next();
@@ -63,7 +62,7 @@ public class GuestsList {
         //Find the guest by last name and first name in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getLastName().equals(lastName) && guestsList.get(i).getFirstName().equals(firstName)){
-                System.out.println("Guest is already on the guests list\n");
+                System.out.println("Guest is on the guests list\n");
                 return true;
             }
         }
@@ -71,7 +70,7 @@ public class GuestsList {
         //Find the guest by last name and first name in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getLastName().equals(lastName) && waitingList.get(i).getFirstName().equals(firstName)){
-                System.out.println("Guest is already on the waiting list\n");
+                System.out.println("Guest is on the waiting list\n");
                 return true;
             }
         }
@@ -81,7 +80,7 @@ public class GuestsList {
         return false;
     }
 
-    private boolean checkReservationByEmail(){
+    private boolean containsGuestByEmail(){
         Scanner scan = new Scanner(System.in);
         System.out.print("Write the email address of the guest: ");
         String email = scan.next();
@@ -90,7 +89,7 @@ public class GuestsList {
         //Find the guest by email in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getEmail().equals(email)){
-                System.out.println("Guest is already on the guests list\n");
+                System.out.println("Guest is on the guests list\n");
                 return true;
             }
         }
@@ -98,7 +97,7 @@ public class GuestsList {
         //Find the guest by email in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getEmail().equals(email)){
-                System.out.println("Guest is already on the waiting list\n");
+                System.out.println("Guest is on the waiting list\n");
                 return true;
             }
         }
@@ -108,7 +107,7 @@ public class GuestsList {
         return false;
     }
 
-    private boolean checkReservationByPhoneNumber(){
+    private boolean containsGuestByPhoneNumber(){
         Scanner scan = new Scanner(System.in);
         System.out.print("Write the phone number of the guest: ");
         String phoneNumber = scan.next();
@@ -117,7 +116,7 @@ public class GuestsList {
         //Find the guest by phone number in the guests list
         for(int i = 0; i < guestsList.size(); i++){
             if(guestsList.get(i).getPhoneNumber().equals(phoneNumber)){
-                System.out.println("Guest is already on the guests list\n");
+                System.out.println("Guest is on the guests list\n");
                 return true;
             }
         }
@@ -125,7 +124,7 @@ public class GuestsList {
         //Find the guest by phone number in the waiting list
         for(int i = 0; i < waitingList.size(); i++){
             if(waitingList.get(i).getPhoneNumber().equals(phoneNumber)){
-                System.out.println("Guest is already on the waiting list\n");
+                System.out.println("Guest is on the waiting list\n");
                 return true;
             }
         }
@@ -135,7 +134,7 @@ public class GuestsList {
         return false;
     }
 
-    public boolean checkReservation(){
+    public boolean containsGuest(){
         Scanner scan = new Scanner(System.in);
         int addChoice = 0;
         boolean optionSelected = false;
@@ -152,19 +151,19 @@ public class GuestsList {
 
             switch(addChoice){
                 case 1:
-                    if(checkReservationByName()){
+                    if(containsGuestByName()){
                         return true;
                     }
                     optionSelected = true;
                     break;
                 case 2:
-                    if(checkReservationByEmail()){
+                    if(containsGuestByEmail()){
                         return true;
                     }
                     optionSelected = true;
                     break;
                 case 3:
-                    if(checkReservationByPhoneNumber()){
+                    if(containsGuestByPhoneNumber()){
                         return true;
                     }
                     optionSelected = true;
@@ -175,6 +174,136 @@ public class GuestsList {
             }
         }
         return false;
+    }
+
+    public int indexOfGuestByName(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Write the last name of the guest: ");
+        String lastName = scan.next();
+
+        System.out.print("Write the first name of the guest: ");
+        String firstName = scan.next();
+        System.out.println();
+
+        //Find the guest by last name and first name in the guests list
+        for(int i = 0; i < guestsList.size(); i++){
+            if(guestsList.get(i).getLastName().equals(lastName) && guestsList.get(i).getFirstName().equals(firstName)){
+                System.out.println("Guest is on the guests list\n");
+                return i;
+            }
+        }
+
+        //Find the guest by last name and first name in the waiting list
+        for(int i = 0; i < waitingList.size(); i++){
+            if(waitingList.get(i).getLastName().equals(lastName) && waitingList.get(i).getFirstName().equals(firstName)){
+                System.out.println("Guest is on the waiting list\n");
+                return i;
+            }
+        }
+
+        //If no guest found
+        System.out.println("Guest is not on our lists.");
+        return -2;
+    }
+
+    public int indexOfGuestByEmail(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Write the email address of the guest: ");
+        String email = scan.next();
+        System.out.println();
+
+        //Find the guest by email in the guests list
+        for(int i = 0; i < guestsList.size(); i++){
+            if(guestsList.get(i).getEmail().equals(email)){
+                System.out.println("Guest is on the guests list\n");
+                return i;
+            }
+        }
+
+        //Find the guest by email in the waiting list
+        for(int i = 0; i < waitingList.size(); i++){
+            if(waitingList.get(i).getEmail().equals(email)){
+                System.out.println("Guest is on the waiting list\n");
+                return i;
+            }
+        }
+
+        //If no guest found
+        System.out.println("Guest is not on our lists.");
+        return -2;
+    }
+
+    public int indexOfGuestByPhoneNumber(){
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Write the phone number of the guest: ");
+        String phoneNumber = scan.next();
+        System.out.println();
+
+        //Find the guest by phone number in the guests list
+        for(int i = 0; i < guestsList.size(); i++){
+            if(guestsList.get(i).getPhoneNumber().equals(phoneNumber)){
+                System.out.println("Guest is on the guests list\n");
+                return i;
+            }
+        }
+
+        //Find the guest by phone number in the waiting list
+        for(int i = 0; i < waitingList.size(); i++){
+            if(waitingList.get(i).getPhoneNumber().equals(phoneNumber)){
+                System.out.println("Guest is on the waiting list\n");
+                return i;
+            }
+        }
+
+        //If no guest found
+        System.out.println("Guest is not on our lists.");
+        return -2;
+    }
+
+    public int indexOfGuest(){
+        Scanner scan = new Scanner(System.in);
+        int addChoice = 0;
+        boolean optionSelected = false;
+        int index = -2;
+
+        while(!optionSelected){
+            System.out.format("Please select a method to search for the guest:\n" +
+                    "1. Last Name & First Name\n" +
+                    "2. Email\n" +
+                    "3. Phone Number\n" +
+                    "Choice: ");
+
+            addChoice = scan.nextInt();
+            System.out.println();
+
+            switch(addChoice){
+                case 1:
+                    int temporaryIndex = indexOfGuestByName();
+                    if(temporaryIndex >= 0){
+                        index =  temporaryIndex;
+                    }
+                    optionSelected = true;
+                    break;
+                case 2:
+                    temporaryIndex = indexOfGuestByEmail();
+                    if(temporaryIndex >= 0){
+                        index =  temporaryIndex;
+                    }
+                    optionSelected = true;
+                    break;
+                case 3:
+                    temporaryIndex = indexOfGuestByPhoneNumber();
+                    if(temporaryIndex >= 0){
+                        index =  temporaryIndex;
+                    }
+                    optionSelected = true;
+                    break;
+                default:
+                    System.out.format("Incorrect choice, please try again\n\n");
+                    break;
+            }
+        }
+        return index;
     }
 
 
