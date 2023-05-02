@@ -11,6 +11,7 @@ A guest is defined in the system by the following fields:
 - First name
 - Email
 - Phone number
+
 The Guest class provides methods for managing the guest's data.
 
 ### GuestsList class
