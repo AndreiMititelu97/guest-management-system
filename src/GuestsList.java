@@ -155,25 +155,6 @@ public class GuestsList {
         return index;
     }
 
-    public boolean removeGuest(){
-        int indexOfGuest = indexOfGuest();
-        if(indexOfGuest < 0){
-            return false;
-        }
-        if(indexOfGuest < this.guestsCapacity){
-
-            this.guestsList.remove(indexOfGuest);
-            System.out.println("Guest has been removed");
-            if(this.guestsList.size() > 0){
-                System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
-            }
-        }else{
-            this.guestsList.remove(indexOfGuest);
-            System.out.println("Guest has been removed");
-        }
-        return true;
-    }
-
     public Guest search(String firstName, String lastName){
         //Find the guest by last name and first name in the guests list
         for(int i = 0; i < this.guestsList.size(); i++){
@@ -187,6 +168,40 @@ public class GuestsList {
         return null;
     }
 
+    public Guest search(int opt, String match){
+        switch(opt){
+            case 2://Search for email
+                for(int i = 0; i < this.guestsList.size(); i++){
+                    if(this.guestsList.get(i).getEmail().equals(match)){
+                        System.out.println("Guest is on the guests list\n");
+                        return this.guestsList.get(i);
+                    }
+                }
+                break;
 
+            case 3://Search for phone number
+                for(int i = 0; i < this.guestsList.size(); i++){
+                    if(this.guestsList.get(i).getPhoneNumber().equals(match)){
+                        System.out.println("Guest is on the guests list\n");
+                        return this.guestsList.get(i);
+                    }
+                }
+                break;
+        }
+        return null;
+    }
+
+    public boolean remove(String firstName, String lastName) {
+        Guest guestToRemove = search(firstName, lastName);
+
+        if (guestToRemove != null) {
+            this.guestsList.remove(guestToRemove);
+            if(this.guestsList.size() > 0){
+                System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
+            }
+            return true;
+        }
+        return false;
+    }
 
 }
