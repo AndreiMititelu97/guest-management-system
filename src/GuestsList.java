@@ -76,7 +76,9 @@ public class GuestsList {
         if (guestToRemove != null) {
             this.guestsList.remove(guestToRemove);
             if(this.guestsList.size() > 0){
-                System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
+                System.out.format("Felicitari %s %s! Locul tau la eveniment este confirmat. Te asteptam!\n",
+                        this.guestsList.get(this.guestsCapacity - 1).getLastName(),
+                        this.guestsList.get(this.guestsCapacity - 1).getFirstName());
             }
             return true;
         }
@@ -90,7 +92,9 @@ public class GuestsList {
         if(guestToRemove != null){
             this.guestsList.remove(guestToRemove);
             if(this.guestsList.size() > 0){
-                System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
+                System.out.format("Felicitari %s %s! Locul tau la eveniment este confirmat. Te asteptam!\n",
+                        this.guestsList.get(this.guestsCapacity - 1).getLastName(),
+                        this.guestsList.get(this.guestsCapacity - 1).getFirstName());
             }
             return true;
         }
@@ -99,6 +103,7 @@ public class GuestsList {
     }
 
     public void showGuestsList(){// Show the list of guests.
+        int count = 0;
         for(int i = 0; i < this.guestsList.size(); i++){
             if(i == this.guestsCapacity){
                 break;
@@ -106,14 +111,23 @@ public class GuestsList {
             System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i + 1),
                     this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
                     this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
+            count++;
+        }
+        if(count == 0){
+           System.out.println("Niciun participant inscris…");
         }
     }
 
     public void showWaitingList(){//Show the people on the waiting list.
+        int count = 0;
         for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
             System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i - this.guestsCapacity + 1),
                     this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
                     this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
+            count++;
+        }
+        if(count == 0){
+            System.out.println("Lista de asteptare este goala...");
         }
     }
 
@@ -150,31 +164,21 @@ public class GuestsList {
     public int numberOfPeopleTotal(){//Show how many people there are in total, including guests.
         return this.guestsList.size();
     }
-
-    public boolean edit(String lastName, String firstName){
-        Guest guestToEdit = search(lastName, firstName);
-
-        if(guestToEdit != null){
-            guestToEdit.setLastName(lastName);
-            guestToEdit.setFirstName(firstName);
-            return true;
-        }
-
-        //If no guest found
-        return false;
-    }
-
-    public boolean edit(int op, String match){
-        Guest guestToEdit = search(op, match);
-
-        if(guestToEdit != null){
-            if(op == 2){
-                guestToEdit.setEmail(match);
-                return true;
-            }
-            if(op == 3){
-                guestToEdit.setPhoneNumber(match);
-                return true;
+    public boolean edit(int fieldToEdit, String match, Guest guestToEdit){
+        if(guestToEdit != null) {
+            switch (fieldToEdit) {
+                case 1:
+                    guestToEdit.setLastName(match);
+                    return true;
+                case 2:
+                    guestToEdit.setFirstName(match);
+                    return true;
+                case 3:
+                    guestToEdit.setEmail(match);
+                    return true;
+                case 4:
+                    guestToEdit.setPhoneNumber(match);
+                    return true;
             }
         }
         //If no guest found
@@ -182,19 +186,20 @@ public class GuestsList {
     }
 
     public void partialSearch(String str){
+        int count = 0;
         for(int i = 0; i < this.guestsList.size(); i++){
-            if(this.guestsList.get(i).getLastName().contains(str)){
-                System.out.println(this.guestsList.get(i).getLastName());
+            if(this.guestsList.get(i).getLastName().contains(str) ||
+                    this.guestsList.get(i).getFirstName().contains(str) ||
+                    this.guestsList.get(i).getEmail().contains(str) ||
+                    this.guestsList.get(i).getPhoneNumber().contains(str)){
+                count++;
+                System.out.format("Nume: %s %s, Email: %s, Telefon: %s\n",
+                        this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
+                        this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
             }
-            if(this.guestsList.get(i).getFirstName().contains(str)){
-                System.out.println(this.guestsList.get(i).getFirstName());
-            }
-            if(this.guestsList.get(i).getEmail().contains(str)){
-                System.out.println(this.guestsList.get(i).getEmail());
-            }
-            if(this.guestsList.get(i).getPhoneNumber().contains(str)){
-                System.out.println(this.guestsList.get(i).getPhoneNumber());
-            }
+        }
+        if(count == 0){
+            System.out.println("Nothing found");
         }
     }
 

@@ -36,15 +36,15 @@ public class Main {
             case 1:
                 String lastName = sc.next();
                 String firstName = sc.next();
-                list.search(lastName, firstName);
+                System.out.println(list.search(lastName, firstName));
                 break;
             case 2:
                 String match = sc.next();
-                list.search(2, match);
+                System.out.println(list.search(2, match));
                 break;
             case 3:
                 match = sc.next();
-                list.search(3, match);
+                System.out.println(list.search(3, match));
                 break;
         }
     }
@@ -70,21 +70,40 @@ public class Main {
     }
 
     private static void updateGuest(Scanner sc, GuestsList list) {
-        int option = sc.nextInt();
-
-        switch(option){
+        int auth = sc.nextInt();
+        Guest myGuest = null;
+        switch(auth){
             case 1:
                 String lastName = sc.next();
                 String firstName = sc.next();
-                list.edit(lastName, firstName);
+                myGuest = list.search(lastName, firstName);
                 break;
             case 2:
                 String match = sc.next();
-                list.edit(2, match);
+                myGuest = list.search(2, match);
                 break;
             case 3:
                 match = sc.next();
-                list.edit(3, match);
+                myGuest = list.search(3, match);
+                break;
+        }
+        int fieldToEdit = sc.nextInt();
+        switch(fieldToEdit){
+            case 1:
+                String lastName = sc.next();
+                list.edit(1, lastName, myGuest);
+                break;
+            case 2:
+                String firstName = sc.next();
+                list.edit(2, firstName, myGuest);
+                break;
+            case 3:
+                String email = sc.next();
+                list.edit(3, email, myGuest);
+                break;
+            case 4:
+                String phoneNumber = sc.next();
+                list.edit(4, phoneNumber, myGuest);
                 break;
         }
     }
@@ -94,6 +113,66 @@ public class Main {
        list.partialSearch(str);
     }
 
-    public static void main(String[] args){
+//    public static void main(String[] args) {
+//        Scanner scanner = new Scanner(System.in);
+//        int size = scanner.nextInt();
+//        scanner.nextLine();
+//
+//        GuestsList list = new GuestsList(size);
+//
+//        boolean running = true;
+//        while (running) {
+//            String command = scanner.nextLine();
+//
+//            switch (command) {
+//                case "help":
+//                    showCommands();
+//                    break;
+//                case "add":
+//                    addNewGuest(scanner, list);
+//                    break;
+//                case "check":
+//                    checkGuest(scanner, list);
+//                    break;
+//                case "remove":
+//                    removeGuest(scanner, list);
+//                    break;
+//                case "update":
+//                    updateGuest(scanner, list);
+//                    break;
+//                case "guests":
+//                    list.showGuestsList();
+//                    break;
+//                case "waitlist":
+//                    list.showWaitingList();
+//                    break;
+//                case "available":
+//                    System.out.println("Numarul de locuri ramase: " + list.numberOfAvailableSpots());
+//                    break;
+//                case "guests_no":
+//                    System.out.println("Numarul de participanti: " + list.numberOfGuests());
+//                    break;
+//                case "waitlist_no":
+//                    System.out.println("Dimensiunea listei de asteptare: " + list.numberOfPeopleWaiting());
+//                    break;
+//                case "subscribe_no":
+//                    System.out.println("Numarul total de persoane: " + list.numberOfPeopleTotal());
+//                    break;
+//                case "search":
+//                    searchList(scanner, list);
+//                    break;
+//                case "quit":
+//                    System.out.println("Aplicatia se inchide...");
+//                    scanner.close();
+//                    running = false;
+//                    break;
+//            }
+//        }
+//    }
+    public static void main(String [] args){
+        GuestsList myG = new GuestsList(2);
+        myG.add(new Guest("Popescu", "Ion", "ipopescu@devmind.com", "0777111222"));
+        myG.add(new Guest("Ionescu", "Ion", "ipopescu@devmind.com", "0777111222"));
+        myG.partialSearch("Ion");
     }
 }
