@@ -25,137 +25,19 @@ public class GuestsList {
         if(isOnTheListAlready(g)){
             return -1;
         }
-
+        //add to guest list
         if(this.guestsList.size() < this.guestsCapacity){
             this.guestsList.add(g);
-            System.out.format("Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n\n");
+            System.out.format("[%s %s] Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n", g.getLastName(), g.getFirstName());
             return 0;
-        }else{
+        }else{//add to waiting list
             this.guestsList.add(g);
-            System.out.format("Te-ai inscris cu succes in lista de asteptare si ai primit numarul de ordine %d. Te vom notifica daca un loc devine disponibil\n\n", this.guestsList.indexOf(g) - 1);
+            System.out.format("[%s %s] Te-ai inscris cu succes in lista de asteptare si ai primit numarul de ordine %d. Te vom notifica daca un loc devine disponibil.\n", g.getLastName(), g.getFirstName(),this.guestsList.indexOf(g) - 2);
             return this.guestsList.indexOf(g);
         }
     }
 
-//    public int indexOfGuestByName(){
-//        Scanner scan = new Scanner(System.in);
-//        System.out.print("Write the last name of the guest: ");
-//        String lastName = scan.next();
-//
-//        System.out.print("Write the first name of the guest: ");
-//        String firstName = scan.next();
-//        System.out.println();
-//
-//        //Find the guest by last name and first name in the guests list
-//        for(int i = 0; i < guestsList.size(); i++){
-//            if(guestsList.get(i).getLastName().equals(lastName) && guestsList.get(i).getFirstName().equals(firstName)){
-//                if(i >= this.guestsCapacity){
-//                    System.out.println("Guest is on the waiting list\n");
-//                    return i;
-//                }
-//                System.out.println("Guest is on the guests list\n");
-//                return i;
-//            }
-//        }
-//
-//        //If no guest found
-//        System.out.println("Guest is not on our lists.");
-//        return -2;
-//    }
-//
-//    public int indexOfGuestByEmail(){
-//        Scanner scan = new Scanner(System.in);
-//        System.out.print("Write the email address of the guest: ");
-//        String email = scan.next();
-//        System.out.println();
-//
-//        //Find the guest by email in the guests list
-//        for(int i = 0; i < guestsList.size(); i++){
-//            if(guestsList.get(i).getEmail().equals(email)){
-//                if(i >= this.guestsCapacity){
-//                    System.out.println("Guest is on the waiting list\n");
-//                    return i;
-//                }
-//                System.out.println("Guest is on the guests list\n");
-//                return i;
-//            }
-//        }
-//
-//        //If no guest found
-//        System.out.println("Guest is not on our lists.");
-//        return -2;
-//    }
-//
-//    public int indexOfGuestByPhoneNumber(){
-//        Scanner scan = new Scanner(System.in);
-//        System.out.print("Write the phone number of the guest: ");
-//        String phoneNumber = scan.next();
-//        System.out.println();
-//
-//        //Find the guest by phone number in the guests list
-//        for(int i = 0; i < guestsList.size(); i++){
-//            if(guestsList.get(i).getPhoneNumber().equals(phoneNumber)){
-//                if(i >= this.guestsCapacity){
-//                    System.out.println("Guest is on the waiting list\n");
-//                    return i;
-//                }
-//                System.out.println("Guest is on the guests list\n");
-//                return i;
-//            }
-//        }
-//
-//        //If no guest found
-//        System.out.println("Guest is not on our lists.");
-//        return -2;
-//    }
-//
-//    public int indexOfGuest(){
-//        Scanner scan = new Scanner(System.in);
-//        int addChoice = 0;
-//        boolean optionSelected = false;
-//        int index = -2;
-//
-//        while(!optionSelected){
-//            System.out.format("Please select a method to search for the guest:\n" +
-//                    "1. Last Name & First Name\n" +
-//                    "2. Email\n" +
-//                    "3. Phone Number\n" +
-//                    "Choice: ");
-//
-//            addChoice = scan.nextInt();
-//            System.out.println();
-//
-//            switch(addChoice){
-//                case 1:
-//                    int temporaryIndex = indexOfGuestByName();
-//                    if(temporaryIndex >= 0){
-//                        index =  temporaryIndex;
-//                    }
-//                    optionSelected = true;
-//                    break;
-//                case 2:
-//                    temporaryIndex = indexOfGuestByEmail();
-//                    if(temporaryIndex >= 0){
-//                        index =  temporaryIndex;
-//                    }
-//                    optionSelected = true;
-//                    break;
-//                case 3:
-//                    temporaryIndex = indexOfGuestByPhoneNumber();
-//                    if(temporaryIndex >= 0){
-//                        index =  temporaryIndex;
-//                    }
-//                    optionSelected = true;
-//                    break;
-//                default:
-//                    System.out.format("Incorrect choice, please try again\n\n");
-//                    break;
-//            }
-//        }
-//        return index;
-//    }
-
-    public Guest search(String firstName, String lastName){
+    public Guest search(String lastName, String firstName){
         //Find the guest by last name and first name in the guests list
         for(int i = 0; i < this.guestsList.size(); i++){
             if(this.guestsList.get(i).getLastName().equals(lastName) && this.guestsList.get(i).getFirstName().equals(firstName)){
@@ -188,8 +70,8 @@ public class GuestsList {
         return null;
     }
 
-    public boolean remove(String firstName, String lastName) {
-        Guest guestToRemove = search(firstName, lastName);
+    public boolean remove(String lastName, String firstName) {
+        Guest guestToRemove = search(lastName, firstName);
 
         if (guestToRemove != null) {
             this.guestsList.remove(guestToRemove);
@@ -198,6 +80,7 @@ public class GuestsList {
             }
             return true;
         }
+        //If no guest found
         return false;
     }
 
@@ -211,27 +94,30 @@ public class GuestsList {
             }
             return true;
         }
+        //If no guest found
         return false;
     }
 
-    public void showGuestsList(){
+    public void showGuestsList(){// Show the list of guests.
         for(int i = 0; i < this.guestsList.size(); i++){
             if(i == this.guestsCapacity){
                 break;
             }
-            System.out.format("%s %s\n", this.guestsList.get(i).getFirstName(), this.guestsList.get(i).getLastName());
+            System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i + 1),
+                    this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
+                    this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
         }
-        System.out.println();
     }
 
-    public void showWaitingList(){
+    public void showWaitingList(){//Show the people on the waiting list.
         for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
-            System.out.format("%s %s\n", this.guestsList.get(i).getFirstName(), this.guestsList.get(i).getLastName());
+            System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i - this.guestsCapacity + 1),
+                    this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
+                    this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
         }
-        System.out.println();
     }
 
-    public int numberOfAvailableSpots(){
+    public int numberOfAvailableSpots(){//Show how many free spots are left.
         int count = 0;
         for(int i = 0; i < this.guestsList.size(); i++){
             if(i == this.guestsCapacity){
@@ -242,7 +128,7 @@ public class GuestsList {
         return this.guestsCapacity - count;
     }
 
-    public int numberOfGuests(){
+    public int numberOfGuests(){//Show how many guests there are.
         int count = 0;
         for(int i = 0; i < this.guestsList.size(); i++){
             if(i == this.guestsCapacity){
@@ -253,7 +139,7 @@ public class GuestsList {
         return count;
     }
 
-    public int numberOfPeopleWaiting(){
+    public int numberOfPeopleWaiting(){//Show how many people are on the waiting
         int count = 0;
         for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
             count++;
@@ -261,10 +147,58 @@ public class GuestsList {
         return count;
     }
 
-    public int numberOfPeopleTotal(){
+    public int numberOfPeopleTotal(){//Show how many people there are in total, including guests.
         return this.guestsList.size();
     }
 
+    public boolean edit(String lastName, String firstName){
+        Guest guestToEdit = search(lastName, firstName);
 
+        if(guestToEdit != null){
+            guestToEdit.setLastName(lastName);
+            guestToEdit.setFirstName(firstName);
+            return true;
+        }
 
+        //If no guest found
+        return false;
+    }
+
+    public boolean edit(int op, String match){
+        Guest guestToEdit = search(op, match);
+
+        if(guestToEdit != null){
+            if(op == 2){
+                guestToEdit.setEmail(match);
+                return true;
+            }
+            if(op == 3){
+                guestToEdit.setPhoneNumber(match);
+                return true;
+            }
+        }
+        //If no guest found
+        return false;
+    }
+
+    public void partialSearch(String str){
+        for(int i = 0; i < this.guestsList.size(); i++){
+            if(this.guestsList.get(i).getLastName().contains(str)){
+                System.out.println(this.guestsList.get(i).getLastName());
+            }
+            if(this.guestsList.get(i).getFirstName().contains(str)){
+                System.out.println(this.guestsList.get(i).getFirstName());
+            }
+            if(this.guestsList.get(i).getEmail().contains(str)){
+                System.out.println(this.guestsList.get(i).getEmail());
+            }
+            if(this.guestsList.get(i).getPhoneNumber().contains(str)){
+                System.out.println(this.guestsList.get(i).getPhoneNumber());
+            }
+        }
+    }
+
+    public String toString() {
+        return String.format("%s", this.guestsCapacity);
+    }
 }
