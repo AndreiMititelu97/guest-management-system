@@ -112,67 +112,61 @@ public class Main {
        String str = sc.next();
        list.partialSearch(str);
     }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        scanner.nextLine();
 
-//    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        int size = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        GuestsList list = new GuestsList(size);
-//
-//        boolean running = true;
-//        while (running) {
-//            String command = scanner.nextLine();
-//
-//            switch (command) {
-//                case "help":
-//                    showCommands();
-//                    break;
-//                case "add":
-//                    addNewGuest(scanner, list);
-//                    break;
-//                case "check":
-//                    checkGuest(scanner, list);
-//                    break;
-//                case "remove":
-//                    removeGuest(scanner, list);
-//                    break;
-//                case "update":
-//                    updateGuest(scanner, list);
-//                    break;
-//                case "guests":
-//                    list.showGuestsList();
-//                    break;
-//                case "waitlist":
-//                    list.showWaitingList();
-//                    break;
-//                case "available":
-//                    System.out.println("Numarul de locuri ramase: " + list.numberOfAvailableSpots());
-//                    break;
-//                case "guests_no":
-//                    System.out.println("Numarul de participanti: " + list.numberOfGuests());
-//                    break;
-//                case "waitlist_no":
-//                    System.out.println("Dimensiunea listei de asteptare: " + list.numberOfPeopleWaiting());
-//                    break;
-//                case "subscribe_no":
-//                    System.out.println("Numarul total de persoane: " + list.numberOfPeopleTotal());
-//                    break;
-//                case "search":
-//                    searchList(scanner, list);
-//                    break;
-//                case "quit":
-//                    System.out.println("Aplicatia se inchide...");
-//                    scanner.close();
-//                    running = false;
-//                    break;
-//            }
-//        }
-//    }
-    public static void main(String [] args){
-        GuestsList myG = new GuestsList(2);
-        myG.add(new Guest("Popescu", "Ion", "ipopescu@devmind.com", "0777111222"));
-        myG.add(new Guest("Ionescu", "Ion", "ipopescu@devmind.com", "0777111222"));
-        myG.partialSearch("Ion");
+        GuestsList list = new GuestsList(size);
+
+        boolean running = true;
+        while (running) {
+            String command = scanner.nextLine();
+
+            switch (command) {
+                case "help":
+                    showCommands();
+                    break;
+                case "add":
+                    addNewGuest(scanner, list);
+                    break;
+                case "check":
+                    checkGuest(scanner, list);
+                    break;
+                case "remove":
+                    removeGuest(scanner, list);
+                    break;
+                case "update":
+                    updateGuest(scanner, list);
+                    break;
+                case "guests":
+                    list.showGuestsList();
+                    break;
+                case "waitlist":
+                    list.showWaitingList();
+                    break;
+                case "available":
+                    System.out.println("Numarul de locuri ramase: " + list.numberOfAvailableSpots());
+                    break;
+                case "guests_no":
+                    System.out.println("Numarul de participanti: " + list.numberOfGuests());
+                    break;
+                case "waitlist_no":
+                    System.out.println("Dimensiunea listei de asteptare: " + list.numberOfPeopleWaiting());
+                    break;
+                case "subscribe_no":
+                    System.out.println("Numarul total de persoane: " + list.numberOfPeopleTotal());
+                    break;
+                case "search":
+                    searchList(scanner, list);
+                    break;
+                case "quit":
+                    System.out.println("Aplicatia se inchide...");
+                    scanner.close();
+                    running = false;
+                    break;
+            }
+        }
     }
+
 }
