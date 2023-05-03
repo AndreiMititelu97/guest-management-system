@@ -20,7 +20,7 @@ The GuestsList class manages the guest list for an event. It contains the follow
 - Number of available seats at the event
 - List of confirmed guests and of guests on the waiting list
 
-The GuestsList class provides methods for managing the guest list, including adding, removing, and updating guests.
+The GuestsList class provides methods for managing the guest list, including adding, removing, searching and updating guests.
 
 ## Usage
 The Main class provides a command-line interface for the user to interact with the guest list. The following commands are available:
