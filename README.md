@@ -1,6 +1,6 @@
 # Guest Management System
 
-This project implements a back-end system for managing a guest list for various educational events, such as "How to start a career in IT". The application consists of three main components: the Guest class for representing a guest, the GuestsList class for managing the guest list, and the Main class as the main engine of the application.
+This project implements a back-end system for managing a guest list for various educational events, such as "International Conference on Education". The application consists of three main components: the Guest class for representing a guest, the GuestsList class for managing the guest list, and the Main class as the main engine of the application.
 
 ## Specifications
 
