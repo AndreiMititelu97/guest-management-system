@@ -140,40 +140,102 @@ public class Main {
     }
 
     private static void updateGuest(Scanner sc, GuestsList list) {
+        System.out.format("How would you like to search for the person?\n" +
+                "1. Last name and first name\n" +
+                "2. Email address\n" +
+                "3. Phone number\n" +
+                "Choice: ");
         int auth = sc.nextInt();
-        Guest myGuest = null;
+
+        Guest guestToEdit = null;
         switch(auth){
             case 1:
+                System.out.print("Insert the last name of the person: ");
                 String lastName = sc.next();
+
+                System.out.print("Insert the first name of the person: ");
                 String firstName = sc.next();
-                myGuest = list.search(lastName, firstName);
+
+
+                guestToEdit = list.search(lastName, firstName);
+                if(guestToEdit == null){
+                    System.out.println("No person found with this information");
+                    sc.nextLine();
+                    return;
+                }
+
+                System.out.println(guestToEdit);
+                sc.nextLine();
                 break;
             case 2:
+                System.out.print("Insert the email address of the person: ");
                 String match = sc.next();
-                myGuest = list.search(2, match);
+
+                guestToEdit = list.search(2, match);
+                if(guestToEdit == null) {
+                    System.out.println("No person found with this information");
+                    sc.nextLine();
+                    return;
+                }
+                System.out.println(guestToEdit);
+                sc.nextLine();
                 break;
             case 3:
+                System.out.print("Insert the phone number of the person: ");
                 match = sc.next();
-                myGuest = list.search(3, match);
+
+                guestToEdit = list.search(3, match);
+                if(guestToEdit == null){
+                    System.out.println("No person found with this information");
+                    sc.nextLine();
+                    return;
+                }
+
+                System.out.println(guestToEdit);
+                sc.nextLine();
                 break;
         }
+
+        System.out.format("Which field would you like to edit?\n" +
+                "1. Last name\n" +
+                "2. First name\n" +
+                "3. Email address\n" +
+                "4. Phone number\n" +
+                "Choice: ");
         int fieldToEdit = sc.nextInt();
+
         switch(fieldToEdit){
             case 1:
+                System.out.println("Insert new last name: ");
                 String lastName = sc.next();
-                list.edit(1, lastName, myGuest);
+
+                list.edit(1, lastName, guestToEdit);
+                sc.nextLine();
+                System.out.println("Changes are done.");
                 break;
             case 2:
+                System.out.println("Insert new first name: ");
                 String firstName = sc.next();
-                list.edit(2, firstName, myGuest);
+
+                list.edit(2, firstName, guestToEdit);
+                sc.nextLine();
+                System.out.println("Changes are done.");
                 break;
             case 3:
+                System.out.println("Insert new email address: ");
                 String email = sc.next();
-                list.edit(3, email, myGuest);
+
+                list.edit(3, email, guestToEdit);
+                sc.nextLine();
+                System.out.println("Changes are done.");
                 break;
             case 4:
+                System.out.println("Insert new phone number: ");
                 String phoneNumber = sc.next();
-                list.edit(4, phoneNumber, myGuest);
+
+                list.edit(4, phoneNumber, guestToEdit);
+                sc.nextLine();
+                System.out.println("Changes are done.");
                 break;
         }
     }
