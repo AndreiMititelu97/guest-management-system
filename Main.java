@@ -50,42 +50,91 @@ public class Main {
                 System.out.print("Insert the first name of the person: ");
                 String firstName = sc.next();
 
-                System.out.println(list.search(lastName, firstName));
+                Guest guestToSearch = list.search(lastName, firstName);
+                if(guestToSearch == null){
+                    System.out.println("No person found with this information");
+                }else{
+                    System.out.println(guestToSearch);
+                }
                 sc.nextLine();
                 break;
             case 2:
                 System.out.print("Insert the email address of the person: ");
                 String match = sc.next();
 
-                System.out.println(list.search(2, match));
+                guestToSearch = list.search(2, match);
+                if(guestToSearch == null){
+                    System.out.println("No person found with this information");
+                }else{
+                    System.out.println(guestToSearch);
+                }
                 sc.nextLine();
                 break;
             case 3:
                 System.out.print("Insert the phone number of the person: ");
                 match = sc.next();
 
-                System.out.println(list.search(3, match));
+                guestToSearch = list.search(3, match);
+                if(guestToSearch == null){
+                    System.out.println("No person found with this information");
+                }else{
+                    System.out.println(guestToSearch);
+                }
                 sc.nextLine();
                 break;
         }
     }
 
     private static void removeGuest(Scanner sc, GuestsList list) {
+        System.out.format("How would you like to search for the person?\n" +
+                "1. Last name and first name\n" +
+                "2. Email address\n" +
+                "3. Phone number\n" +
+                "Choice: ");
         int option = sc.nextInt();
 
         switch(option){
             case 1:
+                System.out.print("Insert the last name of the person: ");
                 String lastName = sc.next();
+
+                System.out.print("Insert the first name of the person: ");
                 String firstName = sc.next();
-                list.remove(lastName, firstName);
+
+                boolean isGuestRemoved = list.remove(lastName, firstName);
+                if(isGuestRemoved){
+                    System.out.println("Person has been removed");
+                }else{
+                    System.out.println("Can not remove that person");
+                }
+
+                sc.nextLine();
                 break;
             case 2:
+                System.out.print("Insert the email address of the person: ");
                 String match = sc.next();
-                list.remove(2, match);
+
+                isGuestRemoved = list.remove(2, match);
+                if(isGuestRemoved){
+                    System.out.println("Person has been removed");
+                }else{
+                    System.out.println("Can not remove that person");
+                }
+
+                sc.nextLine();
                 break;
             case 3:
+                System.out.print("Insert the phone number of the person: ");
                 match = sc.next();
-                list.remove(3, match);
+
+                isGuestRemoved = list.remove(3, match);
+                if(isGuestRemoved){
+                    System.out.println("Person has been removed");
+                }else{
+                    System.out.println("Can not remove that person");
+                }
+
+                sc.nextLine();
                 break;
         }
     }
