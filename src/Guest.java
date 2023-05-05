@@ -81,7 +81,7 @@ public class Guest {
     }
 
     public String toString(){
-        return String.format("Nume: %s %s, Email: %s, Telefon: %s", this.lastName, this.firstName, this.email, this.phoneNumber);
+        return String.format("Name: %s %s, Email: %s, Phone: %s", this.lastName, this.firstName, this.email, this.phoneNumber);
     }
     public String fullName(){
         return String.format("%s %s", this.lastName, this.firstName);

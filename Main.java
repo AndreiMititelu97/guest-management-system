@@ -241,8 +241,11 @@ public class Main {
     }
 
     private static void searchList(Scanner sc, GuestsList list) {
+        System.out.print("Insert string: ");
        String str = sc.next();
+
        list.partialSearch(str);
+       sc.nextLine();
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

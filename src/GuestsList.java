@@ -28,11 +28,11 @@ public class GuestsList {
         //add to guest list
         if(this.guestsList.size() < this.guestsCapacity){
             this.guestsList.add(g);
-            System.out.format("[%s %s] Felicitari! Locul tau la eveniment este confirmat. Te asteptam!\n", g.getLastName(), g.getFirstName());
+            System.out.format("[%s %s] Congratulations! Your place at the event is confirmed. We are waiting for you!\n", g.getLastName(), g.getFirstName());
             return 0;
         }else{//add to waiting list
             this.guestsList.add(g);
-            System.out.format("[%s %s] Te-ai inscris cu succes in lista de asteptare si ai primit numarul de ordine %d. Te vom notifica daca un loc devine disponibil.\n", g.getLastName(), g.getFirstName(),this.guestsList.indexOf(g) - 2);
+            System.out.format("[%s %s] You have successfully entered the waiting list and received order number %d. We will notify you if a seat becomes available.\n", g.getLastName(), g.getFirstName(),this.guestsList.indexOf(g) - 1);
             return this.guestsList.indexOf(g);
         }
     }
@@ -92,7 +92,7 @@ public class GuestsList {
         if(guestToRemove != null){
             this.guestsList.remove(guestToRemove);
             if(this.guestsList.size() > 0){
-                System.out.format("Felicitari %s %s! Locul tau la eveniment este confirmat. Te asteptam!\n",
+                System.out.format("Congratulations %s %s! Your place at the event is confirmed. We are waiting for you!\n",
                         this.guestsList.get(this.guestsCapacity - 1).getLastName(),
                         this.guestsList.get(this.guestsCapacity - 1).getFirstName());
             }
@@ -108,26 +108,26 @@ public class GuestsList {
             if(i == this.guestsCapacity){
                 break;
             }
-            System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i + 1),
+            System.out.format("%d. Name: %s %s, Email: %s, Phone: %s\n", (i + 1),
                     this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
                     this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
             count++;
         }
         if(count == 0){
-           System.out.println("Niciun participant inscris…");
+           System.out.println("Guests list is empty");
         }
     }
 
     public void showWaitingList(){//Show the people on the waiting list.
         int count = 0;
         for(int i = this.guestsCapacity; i < this.guestsList.size(); i++){
-            System.out.format("%d. Nume: %s %s, Email: %s, Telefon: %s\n", (i - this.guestsCapacity + 1),
+            System.out.format("%d. Name: %s %s, Email: %s, Phone: %s\n", (i - this.guestsCapacity + 1),
                     this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
                     this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
             count++;
         }
         if(count == 0){
-            System.out.println("Lista de asteptare este goala...");
+            System.out.println("Waiting list is empty.");
         }
     }
 
@@ -193,7 +193,7 @@ public class GuestsList {
                     this.guestsList.get(i).getEmail().contains(str) ||
                     this.guestsList.get(i).getPhoneNumber().contains(str)){
                 count++;
-                System.out.format("Nume: %s %s, Email: %s, Telefon: %s\n",
+                System.out.format("Name: %s %s, Email: %s, Phone: %s\n",
                         this.guestsList.get(i).getLastName(), this.guestsList.get(i).getFirstName(),
                         this.guestsList.get(i).getEmail(), this.guestsList.get(i).getPhoneNumber());
             }
